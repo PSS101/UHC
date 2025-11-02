@@ -6,7 +6,7 @@ import { DiReact } from 'react-icons/di';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 
-export default function UsersPage(){
+export default function UsersPage({navigation}){
     return(
         <SafeAreaView >
         <View styles={styles.container}>
@@ -14,7 +14,7 @@ export default function UsersPage(){
             style={{margin:20,fontWeight:'bold',fontSize:25}}>Select your role</Text>
             <Text style={{margin:10,color:'#898888'}}>Choose how you want to use UnifiedCare</Text>
 
-            <Pressable>
+            <Pressable onPress={()=>navigation.navigate('Patient')}>
             <View style={styles.card}> 
                 <Ionicons name="person-outline" size={30} color="#1976D2" backgroundColor={'#e4edf5'} borderRadius={10} padding={15}/>
                 <View style={{marginLeft:10,flexShrink: 1}}>
@@ -24,7 +24,7 @@ export default function UsersPage(){
             </View>
             </Pressable>
             
-            <Pressable>
+            <Pressable  onPress={()=>navigation.navigate('Doctor')}>
              <View style={styles.card}>
                 <FontAwesome5 name="stethoscope" size={26} color="#5E35B1" backgroundColor={'#e9e8fc'} borderRadius={10} padding={15}/>
                 <View style={{marginLeft:10,flexShrink: 1,}}>
@@ -34,7 +34,7 @@ export default function UsersPage(){
             </View>
             </Pressable>
             
-            <Pressable>
+            <Pressable onPress={()=>navigation.navigate('Admin')}>
              <View style={styles.card}>
                  <Ionicons name="settings-outline" size={26} color="#616161" backgroundColor={'#ecedef'} borderRadius={10} padding={15} />
                 <View style={{marginLeft:10,flexShrink: 1}}>

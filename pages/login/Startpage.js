@@ -5,7 +5,7 @@ export default function StartPage({navigation}){
 <View style={styles.container}>
     <View style={styles.container2}>
       <Image style={styles.image}
-        source={require('../assets/logo.png')}
+        source={'C:\Users\PSS\UHC\pages\assets\logo.png'}
       />
       <Text style={{margin:10}}>Smart, Secure.</Text>
       <Text >Connected Healthcare</Text>
