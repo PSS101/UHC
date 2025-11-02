@@ -11,7 +11,7 @@ export default function StartPage({navigation}){
       <Text >Connected Healthcare</Text>
    </View >
    <View style={styles.container3}>
-      <Pressable style={styles.button}><Text style={styles.buttonText} onPress={() =>navigation.navigate('Otp')}>Continue</Text></Pressable>
+      <Pressable style={styles.button}><Text style={styles.buttonText} onPress={() =>navigation.navigate('users')}>Continue</Text></Pressable>
        <Text>Secure access-end-to-end encrypted</Text>
     </View>
     </View>
