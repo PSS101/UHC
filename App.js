@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import {  NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import StartPage from './pages/login/Startpage';
+import OtpPage from './pages/login/otpPage';
+import OtpVerify from './pages/login/otpVerify';
+import UsersPage from './pages/login/usersPage';
+const Stack = createStackNavigator();
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    
+    <NavigationContainer>
+     
+       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Start" component={StartPage} />
+        <Stack.Screen name="Otp" component={OtpPage} />
+        <Stack.Screen name="OtpVerify" component={OtpVerify} />
+         <Stack.Screen name="users" component={UsersPage} />
+        </Stack.Navigator>
+
+    </NavigationContainer>
+    
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
