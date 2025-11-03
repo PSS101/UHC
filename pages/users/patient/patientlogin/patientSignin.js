@@ -5,8 +5,8 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { DiReact } from 'react-icons/di';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
-import { json } from 'body-parser';
 
+import { Ionicons } from '@expo/vector-icons';
 export default function PatientSignIn({navigation}){
   const [num,setNum] = useState(0)
     const add = async (key, item) => {
@@ -34,21 +34,25 @@ export default function PatientSignIn({navigation}){
   }
 
    const otpGenerate = async()=>{
-    await add('number',num)
-    console.log(await retrieve('number'))
+    
     fetchSite()
     let payload=''
-    if(num.contains('@') ){
+    if(num.includes('@') ){
+      await add('email',num)
+    console.log(await retrieve('email'))
       payload=JSON.stringify({
     "email":num
   })
     }
     else{
+      await add('number',num)
+    console.log(await retrieve('number'))
       payload=JSON.stringify({
     "phonenumber":num
   })
     }
-    fetch(site+'/send-otp', {
+navigation.navigate('OtpVerify')
+    await fetch(site+'/send-otp', {
       
   method: 'POST',
   headers: {
@@ -57,10 +61,10 @@ export default function PatientSignIn({navigation}){
   },
   body: payload,
 });
-    navigation.navigate('OtpVerify')
+    
   }
     return(
-       <View>
+       <SafeAreaView>
         <View style={styles.container}>
 
           <View style={styles.container2}>
@@ -73,7 +77,7 @@ export default function PatientSignIn({navigation}){
           
           <Pressable style={styles.button}><Text style={styles.buttonText} onPress={otpGenerate}>Continue</Text></Pressable>
         </View>
-       </View>
+       </SafeAreaView>
     )
 }
 const styles = StyleSheet.create({
@@ -84,7 +88,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding:10,
     height:'100%',
-    margin:10
+    margin:10,
+    marginTop:200,
   },
    container2: {
     flex:1,
@@ -118,12 +123,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     
-    marginTop:400
+    marginTop:40
    
 
   },
   buttonText:{
     color:'#fff',
     fontSize: 16,
+  },
+  input:{
+    flex:'display',
+    flexDirection:'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius:15,
+    borderWidth:1,
+    borderColor:'#b7bcc5',
+    width:'80%',
+    height:40,
+    margin:20
   },
 });

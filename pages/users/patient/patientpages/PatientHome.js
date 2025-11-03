@@ -10,6 +10,8 @@ export default function PatientHome({navigation}){
   const [appointmentTime,setAppointmentTime] = useState(0)
   const [doctorName,setDoctorName] = useState('')
   const [branch,setBranch] = useState('')
+  const [diag,setDiag] = useState([])
+  const [meds,setMeds] = useState([])
    const add = async (key, item) => {
     try {
       await AsyncStorage.setItem(key, item);
@@ -48,10 +50,10 @@ export default function PatientHome({navigation}){
               setAppointmentDate(data['appointmentDate'])
               setAppointmentTime(data['appointmentTime'])
               setBranch(data['branch'])
-              
+
               
           }
-          addSite()
+          getData()
   
   
        },[])
@@ -74,7 +76,17 @@ export default function PatientHome({navigation}){
             <Text>{branch}</Text>
             <Pressable style={styles.button}><Text style={styles.buttonText} onPress={() =>navigation.navigate('users')}>Book Appointment</Text></Pressable>
           <Text>Recent Diagnostics</Text>
+          <View>
+            {diag.map((d)=>(
+              <Text>{d.name} {d.date}</Text>
+            ))}
+          </View>
           <Text>Active Medications</Text>
+          <View>
+            {meds.map((m)=>(
+              <Text styles={styles.meds}>{m.name}</Text>
+            ))}
+          </View>
           </View>
         </View>
        
@@ -120,4 +132,9 @@ const styles = StyleSheet.create({
     color:'#fff',
     fontSize: 16,
   },
+  meds:{
+    height:40,
+    width:80,
+    borderRadius:20,
+  }
 });
