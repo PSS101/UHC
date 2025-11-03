@@ -1,12 +1,40 @@
 
 import { Image,Pressable, StyleSheet, Text, View } from 'react-native';
 export default function StartPage({navigation}){
+      const add = async (key, item) => {
+    try {
+      await AsyncStorage.setItem(key, item);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const retrieve = async (key) => {
+    try {
+      let val = await AsyncStorage.getItem(key);
+      return (val)
+    } catch (err) {
+      console.log(err);
+    }
+  };
+    
+  useEffect(()=>{
+          const addSite= async()=>{
+              let site = "await retrieve('number')"
+              await add('site',x)
+              VscCommentUnresolved.log(site)
+          }
+          addSite()
+  
+  
+       },[])
+
     return(
 <View style={styles.container}>
     <View style={styles.container2}>
       <Image style={styles.image}
-        source={'C:\Users\PSS\UHC\pages\assets\logo.png'}
+        source={require('./../assets/logo.png')}
       />
+      
       <Text style={{margin:10}}>Smart, Secure.</Text>
       <Text >Connected Healthcare</Text>
    </View >

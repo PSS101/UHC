@@ -24,9 +24,26 @@ export default function OtpVerify({navigation}){
     }
   };
     
-  const verifyOtp = ()=>{
+  const verifyOtp = async()=>{
+
+    let number = await retrieve('number')
+    fetchSite()
+    fetch(site+'/verify-otp', {
+      
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    "phonenumber":number,
+    otp:otp,
+    
+  }),
+});
+    
      console.log(otp)
-    navigation.navigate('users')
+    navigation.navigate('patient')
    
   }
      useEffect(()=>{

@@ -7,13 +7,28 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 import { Ionicons ,FontAwesome5} from '@expo/vector-icons';
 import RNPickerSelect from "react-native-picker-select";
-import OtpVerify from '../../login/otpVerify';
+
 export default function PatientSignUp({navigation}){
     const [gender, setGender] = useState(null);
   const [bloodGroup, setBloodGroup] = useState(null);
 
-
-  const verify = ()=>{
+   const add = async (key, item) => {
+    try {
+      await AsyncStorage.setItem(key, item);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const retrieve = async (key) => {
+    try {
+      let val = await AsyncStorage.getItem(key);
+      return (val)
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const verify = async()=>{
+    await add('number',num)
     navigation.navigate('OtpVerify')
   }
     return(

@@ -21,10 +21,30 @@ export default function OtpPage({navigation}){
       console.log(err);
     }
   };
+  const fetchSite = async()=>{
+    if(site.length==0){
+    let x = await retrieve('site')
+    //console.log(x)
+    setSite(x)
+    }
+    //console.log(site)
+  }
 
   const otpGenerate = async()=>{
     await add('number',num)
     console.log(await retrieve('number'))
+    fetchSite()
+    fetch(site+'/send-otp', {
+      
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    "phonenumber":num
+  }),
+});
     navigation.navigate('OtpVerify')
   }
     return(

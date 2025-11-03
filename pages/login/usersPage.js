@@ -14,7 +14,7 @@ export default function UsersPage({navigation}){
             style={{margin:20,fontWeight:'bold',fontSize:25}}>Select your role</Text>
             <Text style={{margin:10,color:'#898888'}}>Choose how you want to use UnifiedCare</Text>
 
-            <Pressable onPress={()=>navigation.navigate('Patient')}>
+            <Pressable onPress={()=>navigation.navigate('PatientPage')}>
             <View style={styles.card}> 
                 <Ionicons name="person-outline" size={30} color="#1976D2" backgroundColor={'#e4edf5'} borderRadius={10} padding={15}/>
                 <View style={{marginLeft:10,flexShrink: 1}}>

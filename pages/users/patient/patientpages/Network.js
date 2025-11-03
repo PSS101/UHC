@@ -6,7 +6,7 @@ import { DiReact } from 'react-icons/di';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 
-export default function PatientSignIn({navigation}){
+export default function Network({navigation}){
     return(
        <View>
 
