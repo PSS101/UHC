@@ -64,11 +64,12 @@ navigation.navigate('OtpVerify')
     
   }
     return(
-       <SafeAreaView>
+       
         <View style={styles.container}>
-
+          
           <View style={styles.container2}>
-                    <Text style={{marginLeft:30,color:'#898888',marginRight:'auto'}}>Contact no or phone no</Text>
+                    <Text style={{fontSize:18,fontWeight:'bold',marginBottom:40}}>SignIn</Text>
+                    <Text style={{marginLeft:'auto',color:'#000000ff',marginRight:'auto'}}>Contact no or phone no</Text>
                     <View style={styles.input}>
                         <Ionicons name="call-outline" size={24} color="#b7bcc5" />
                         <TextInput style={{width:'80%'}} value={num} onChangeText={(x)=>setNum(x)} placeholder='Enter your phone number'></TextInput>
@@ -77,7 +78,7 @@ navigation.navigate('OtpVerify')
           
           <Pressable style={styles.button}><Text style={styles.buttonText} onPress={otpGenerate}>Continue</Text></Pressable>
         </View>
-       </SafeAreaView>
+       
     )
 }
 const styles = StyleSheet.create({
@@ -86,18 +87,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#f4f4f4',
     alignItems: 'center',
     justifyContent: 'center',
+    textAlign:'center',
     padding:10,
     height:'100%',
     margin:10,
-    marginTop:200,
+    marginTop:2,
   },
    container2: {
     flex:1,
-    flex:'display',
+   
     backgroundColor: '#f4f4f4',
     alignItems: 'center',
     justifyContent: 'center',
-    
+    textAlign:'center',
     padding:5,
     width:'100%',
  
@@ -123,7 +125,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     
-    marginTop:40
+    marginBottom:100
    
 
   },

@@ -82,7 +82,6 @@ await fetch('https://sisterlike-tactically-alease.ngrok-free.dev/send-otp', {
                         <TextInput style={{width:'80%'}} value={name} onChangeText={(x)=>setName(x)} placeholder='Enter your your Full name'></TextInput>
                     </View>
                 </View>
-
                 <View style={styles.container2}>
                     <Text style={{marginLeft:30,color:'#898888',marginRight:'auto'}}>Age</Text>
                     <View style={styles.input}>

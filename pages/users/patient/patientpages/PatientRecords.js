@@ -12,7 +12,7 @@ export default function PatientRecords({navigation}){
     const [dob,setDob] = useState('')
       const [gender,setGender] = useState('')
       const [blood,setBlood] = useState('')
-      const [prescription,setPrescription] = useState('')
+      const [prescription,setPrescription] = useState([])
       useEffect(()=>{
                 const getData= async()=>{
                     let site = "https://sisterlike-tactically-alease.ngrok-free.dev"
