@@ -4,12 +4,57 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { DiReact } from 'react-icons/di';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 export default function PatientHome({navigation}){
   const [appointmentDate,setAppointmentDate] = useState(0)
   const [appointmentTime,setAppointmentTime] = useState(0)
   const [doctorName,setDoctorName] = useState('')
   const [branch,setBranch] = useState('')
+   const add = async (key, item) => {
+    try {
+      await AsyncStorage.setItem(key, item);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const retrieve = async (key) => {
+    try {
+      let val = await AsyncStorage.getItem(key);
+      return (val)
+    } catch (err) {
+      console.log(err);
+    }
+  };
+    useEffect(()=>{
+          const getData= async()=>{
+              let site = "https://sisterlike-tactically-alease.ngrok-free.dev"
+              await add('site',site)
+              let num = await retrieve('number')
+              let email = await retrieve('email')
+              console.log(site)
+               let res = await fetch(site+'/patient-data', {
+                    
+                method: 'POST',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  "email":email,
+                  "phonenumber":num,
+                }),
+              });
+              let data = res.json()
+              setAppointmentDate(data['appointmentDate'])
+              setAppointmentTime(data['appointmentTime'])
+              setBranch(data['branch'])
+              
+              
+          }
+          addSite()
+  
+  
+       },[])
     return(
       <SafeAreaView style={{height:'100%'}}>
    

@@ -8,6 +8,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function OtpVerify({navigation}){
     const [num,setNum] = useState(0)
     const [otp,setOtp] = useState(0)
+    const [email,setEmail] = useState('')
+    const [site,setSite] = useState('https://sisterlike-tactically-alease.ngrok-free.dev')
     const add = async (key, item) => {
     try {
       await AsyncStorage.setItem(key, item);
@@ -25,10 +27,12 @@ export default function OtpVerify({navigation}){
   };
     
   const verifyOtp = async()=>{
-
-    let number = await retrieve('number')
-    fetchSite()
-    fetch(site+'/verify-otp', {
+    console.log(otp)
+    console.log(num)
+    
+    try{
+      let res = await fetch('https://sisterlike-tactically-alease.ngrok-free.dev/verify-otp', {
+        
       
   method: 'POST',
   headers: {
@@ -36,21 +40,33 @@ export default function OtpVerify({navigation}){
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-    "phonenumber":number,
-    otp:otp,
-    
+    "phonenumber":num,
+    "email":email,
+    "otp":otp,
   }),
 });
+let data = res.json()
+let success = data["success"]
+//if(success){
+navigation.navigate('Patient')
+//}
+    }
+    catch(err){
+      console.log(err)
+    }
     
-     console.log(otp)
-    navigation.navigate('patient')
+    
+     console.log("verify")
+    
    
   }
      useEffect(()=>{
         const fetchdata = async()=>{
             let x = await retrieve('number')
+            let y = await retrieve('email')
             console.log(x)
             setNum(x)
+            setEmail(y)
         }
         fetchdata()
 
@@ -60,6 +76,7 @@ export default function OtpVerify({navigation}){
         <View style={styles.container}>
             <Text>Enter OTP</Text>
             <Text>We've sent a 6-digit code to {num}</Text>
+            <Text>or {email}</Text>
             <OtpInput
             numberOfDigits={6}
             focusColor="#2b6cb0"

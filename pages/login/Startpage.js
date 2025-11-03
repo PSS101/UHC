@@ -1,5 +1,7 @@
 
 import { Image,Pressable, StyleSheet, Text, View } from 'react-native';
+import { useState,useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function StartPage({navigation}){
       const add = async (key, item) => {
     try {
@@ -19,9 +21,9 @@ export default function StartPage({navigation}){
     
   useEffect(()=>{
           const addSite= async()=>{
-              let site = "await retrieve('number')"
-              await add('site',x)
-              VscCommentUnresolved.log(site)
+              let site = "https://sisterlike-tactically-alease.ngrok-free.dev"
+              await add('site',site)
+              console.log(site)
           }
           addSite()
   

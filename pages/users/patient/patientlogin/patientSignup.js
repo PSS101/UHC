@@ -10,7 +10,13 @@ import RNPickerSelect from "react-native-picker-select";
 
 export default function PatientSignUp({navigation}){
     const [gender, setGender] = useState(null);
+    const [num,setNum] = useState(0);
+    const[age,setAge] = useState(0)
+    const [name,setName] =useState('');
+    const [allergies,setAllergies] = useState('')
+    const [email,setEmail] = useState('')
   const [bloodGroup, setBloodGroup] = useState(null);
+  const [site,setSite] = useState('https://sisterlike-tactically-alease.ngrok-free.dev')
 
    const add = async (key, item) => {
     try {
@@ -27,9 +33,44 @@ export default function PatientSignUp({navigation}){
       console.log(err);
     }
   };
+  const fetchSite = async()=>{
+    if(site.length==0){
+    let x = await retrieve('site')
+    //console.log(x)
+    setSite(x)
+    }
+    //console.log(site)
+  }
   const verify = async()=>{
+    console.log('verify')
     await add('number',num)
+    await add("email",email)
+    console.log(num)
+    try{
+await fetch('https://sisterlike-tactically-alease.ngrok-free.dev/send-otp', {
+      
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+     "fname":name,
+     "age":age,
+     "gender":gender,
+     "bloodgroup":bloodGroup,
+     "allergies":allergies,
+     "email":email,
+    "phonenumber":num,
+  }),
+});
+    }
+    catch(error){
+      console.log(error)
+    }
+    
     navigation.navigate('OtpVerify')
+    
   }
     return(
         
@@ -38,7 +79,7 @@ export default function PatientSignUp({navigation}){
                     <Text style={{marginLeft:30,color:'#898888',marginRight:'auto'}}>Full Name</Text>
                     <View style={styles.input}>
                         <Ionicons name="person-outline" size={24} color="#555" />
-                        <TextInput style={{width:'80%'}} placeholder='Enter your phone number'></TextInput>
+                        <TextInput style={{width:'80%'}} value={name} onChangeText={(x)=>setName(x)} placeholder='Enter your your Full name'></TextInput>
                     </View>
                 </View>
 
@@ -46,7 +87,7 @@ export default function PatientSignUp({navigation}){
                     <Text style={{marginLeft:30,color:'#898888',marginRight:'auto'}}>Age</Text>
                     <View style={styles.input}>
                         <Ionicons name="person-outline" size={24} color="#555" />
-                        <TextInput style={{width:'80%'}} placeholder='Enter your phone number'></TextInput>
+                        <TextInput style={{width:'80%'}} value={age} onChangeText={(x)=>setAge(x)} placeholder='Enter your age'></TextInput>
                     </View>
                 </View>
 
@@ -93,23 +134,23 @@ export default function PatientSignUp({navigation}){
                     <Text style={{marginLeft:30,color:'#898888',marginRight:'auto'}}>Allergies</Text>
                     <View style={styles.input}>
                         <Ionicons name="information-circle-outline" size={24} color="#555" />
-                        <TextInput style={{width:'80%'}} placeholder='Enter your phone number'></TextInput>
+                        <TextInput style={{width:'80%'}} value={allergies} onChangeText={(x)=>setAllergies(x)}  placeholder='Enter your phone number'></TextInput>
                     </View>
                 </View>
 
                 <View style={styles.container2}>
-                    <Text style={{marginLeft:30,color:'#898888',marginRight:'auto'}}>Chronic Conditions (Optional)</Text>
+                    <Text style={{marginLeft:30,color:'#898888',marginRight:'auto'}}>email(Optional)</Text>
                     <View style={styles.input}>
                         <Ionicons name="heart-outline" size={24} color="#555" />
-                        <TextInput style={{width:'80%'}} placeholder='Enter your phone number'></TextInput>
+                        <TextInput style={{width:'80%'}} value={email} onChangeText={(x)=>setEmail(x)} placeholder='Enter your phone number' ></TextInput>
                     </View>
                 </View>
 
                 <View style={styles.container2}>
-                    <Text style={{marginLeft:30,color:'#898888',marginRight:'auto'}}>Emergency Contact</Text>
+                    <Text style={{marginLeft:30,color:'#898888',marginRight:'auto'}}>Contact no</Text>
                     <View style={styles.input}>
                         <Ionicons name="call-outline" size={24} color="#b7bcc5" />
-                        <TextInput style={{width:'80%'}} placeholder='Enter your phone number'></TextInput>
+                        <TextInput style={{width:'80%'}} value={num} onChangeText={(x)=>setNum(x)} placeholder='Enter your phone number'></TextInput>
                     </View>
                 </View>
 
@@ -174,7 +215,8 @@ const styles = StyleSheet.create({
     height:40,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop:60
+    marginTop:60,
+    marginBottom:100
    
 
   },
